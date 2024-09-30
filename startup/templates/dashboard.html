@@ -1,0 +1,49 @@
+<!-- templates/dashboard.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Startup Success Prediction Analysis</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-8">
+    <div class="bg-white p-4 rounded shadow">
+        <h2 class="text-xl font-semibold mb-2">Summary Statistics</h2>
+        <p>Total Startups Analyzed: {{ total_startups }}</p>
+        <p>Model Used: {{ model_name }}</p>
+    </div>
+</div>
+
+<div class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">Startup Success vs Failure</h2>
+    <img src="data:image/png;base64,{{ success_plot_url }}" alt="Startup Success vs Failure" class="max-w-full h-auto">
+</div>
+
+<h2 class="text-xl font-semibold mb-2">Predicted Results</h2>
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-4 py-2">Umur Startup (bulan)</th>
+                <th class="px-4 py-2">Jumlah Investor</th>
+                <th class="px-4 py-2">Nilai Investasi</th>
+                <th class="px-4 py-2">Ukuran Tim</th>
+                <th class="px-4 py-2">Prediction (Berhasil)</th>
+                <th class="px-4 py-2">Success Probability</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr class="{% if loop.index % 2 == 0 %}bg-gray-50{% endif %}">
+                <td class="border px-4 py-2">{{ row['Umur Startup (bulan)'] }}</td>
+                <td class="border px-4 py-2">{{ row['Jumlah Investor'] }}</td>
+                <td class="border px-4 py-2">{{ row['Nilai Investasi'] }}</td>
+                <td class="border px-4 py-2">{{ row['Ukuran Tim'] }}</td>
+                <td class="border px-4 py-2 {% if row['Prediction'] == 'YA' %}text-green-600{% else %}text-red-600{% endif %}">
+                    {{ row['Prediction'] }}
+                </td>
+                <td class="border px-4 py-2">{{ "%.2f"|format(row['Success Probability'] * 100) }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

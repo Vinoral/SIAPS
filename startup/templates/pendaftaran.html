@@ -1,0 +1,47 @@
+<!-- templates/pendaftaran.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Pendaftaran Startup</h2>
+    <form method="POST" action="{{ url_for('pendaftaran') }}">
+        <div class="form-group">
+            <label for="startup_id">ID Startup</label>
+            <input type="text" class="form-control" id="startup_id" name="startup_id" placeholder="Enter Startup ID" required>
+        </div>
+        <div class="form-group">
+            <label for="umur_startup">Umur Startup (bulan)</label>
+            <input type="number" class="form-control" id="umur_startup" name="umur_startup" placeholder="Enter Startup Age (in months)" required>
+        </div>
+        <div class="form-group">
+            <label for="jumlah_investor">Jumlah Investor</label>
+            <input type="number" class="form-control" id="jumlah_investor" name="jumlah_investor" placeholder="Enter Number of Investors" required>
+        </div>
+        <div class="form-group">
+            <label for="nilai_investasi">Nilai Investasi (Rp)</label>
+            <input type="number" class="form-control" id="nilai_investasi" name="nilai_investasi" placeholder="Enter Investment Value" required>
+        </div>
+        <div class="form-group">
+            <label for="ukuran_tim">Ukuran Tim</label>
+            <input type="number" class="form-control" id="ukuran_tim" name="ukuran_tim" placeholder="Enter Team Size" required>
+        </div>
+        <div class="form-group">
+            <label for="industri">Industri</label>
+            <select class="form-control" id="industri" name="industri" required>
+                <option value="">-- Pilih Industri --</option>
+                <option value="Teknologi">Teknologi</option>
+                <option value="E-commerce">E-commerce</option>
+                <option value="Fintech">Fintech</option>
+                <option value="Kesehatan">Kesehatan</option>
+                <option value="Pendidikan">Pendidikan</option>
+                <option value="Hiburan">Hiburan</option>
+                <option value="Transportasi">Transportasi</option>
+                <option value="Makanan & Minuman">Makanan & Minuman</option>
+                <option value="Energi Terbarukan">Energi Terbarukan</option>
+                <option value="Properti">Properti</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Daftarkan Startup</button>
+    </form>
+</div>
+{% endblock %}

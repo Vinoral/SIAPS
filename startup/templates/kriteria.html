@@ -1,0 +1,45 @@
+<!-- templates/kriteria.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Daftar Startup</h1>
+    <a href="{{ url_for('export_data') }}" class="btn btn-success">Export ke CSV</a>
+
+    <h2>Data dari Database</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Umur Startup</th>
+                <th>Jumlah Investor</th>
+                <th>Nilai Investasi</th>
+                <th>Ukuran Tim</th>
+                <th>Industri</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for startup in startups %}
+            <tr>
+                <td>{{ startup.id }}</td>
+                <td>{{ startup.umur_startup }}</td>
+                <td>{{ startup.jumlah_investor }}</td>
+                <td>{{ startup.nilai_investasi }}</td>
+                <td>{{ startup.ukuran_tim }}</td>
+                <td>{{ startup.industri }}</td>
+                <td>{{ startup.berhasil }}</td>
+                <td>
+                    <a href="{{ url_for('edit_kriteria', id=startup.id) }}" class="btn btn-primary">Edit</a>
+                    <form action="{{ url_for('delete_kriteria', id=startup.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+    
